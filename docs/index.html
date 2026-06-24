@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LIST3R · Long-sequence Instance-aware 3D Reconstruction</title>
 <meta name="description" content="LIST3R uses persistent object instances as anchors to organize long-sequence 3D reconstruction, recovering long-range revisits and producing globally consistent camera trajectories and point clouds." />
-<link rel="stylesheet" href="styles.css?v=2" />
+<link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
 
@@ -19,7 +19,6 @@
       <a href="#compare">3D Compare</a>
       <a href="#trajectory">Trajectory</a>
       <a href="#geometry">Geometry</a>
-      <a href="#library">Library</a>
     </div>
     <div class="theme-switch" title="Switch theme">
       <button class="sw-midnight active" data-set="midnight" aria-label="Midnight theme"></button>
@@ -35,7 +34,7 @@
     <h1>LIST3R: <span class="grad">Long-sequence Instance-aware</span> 3D Reconstruction</h1>
     <p class="sub">Using persistent object instances as anchors to organize long-horizon 3D reconstruction.</p>
     <div class="authors">Jing Gao &nbsp;·&nbsp; Wei Wang &nbsp;·&nbsp; Feiran Wang &nbsp;·&nbsp; Yan Yan</div>
-    <div class="affil">Beijing Jiaotong University &nbsp;·&nbsp; Illinois Institute of Technology &nbsp;·&nbsp; University of Illinois Chicago</div>
+    <div class="affil">Beijing Jiaotong University &nbsp;·&nbsp; University of Illinois Chicago</div>
     <div class="badges">
       <a class="badge primary" href="#compare">▶ Interactive 3D Comparison</a>
       <a class="badge" href="#">📄 Paper (PDF)</a>
@@ -139,6 +138,20 @@
         <b>Instance-guided cross-subsequence association.</b> From local instance libraries and per-subsequence
         reconstructions, LIST3R establishes reliable connections via long-range revisit discovery and instance-aware
         merging. Adjacent and loop edges are optimized in a global association graph to obtain aligned subsequences.
+      </figcaption>
+    </figure>
+
+    <h3 style="font-size:1.25rem;margin:36px 0 6px">Global Instance Library</h3>
+    <p class="lead" style="margin-bottom:18px">
+      Local instances of the same physical object across subsequences are consolidated into persistent global records —
+      each maintaining object geometry, global 3D location, and spatial relations. This can serve as a 3D memory basis for
+      downstream VLMs to perform object querying and scene-level reasoning.
+    </p>
+    <figure class="figure reveal">
+      <img src="assets/figs/library.png" alt="Global instance library" data-zoom />
+      <figcaption>
+        <b>Global Instance Library.</b> From local instance libraries and reconstructed geometry, LIST3R updates instance
+        evidence and organizes records into a global 3D instance library with object-level geometry, location and relations.
       </figcaption>
     </figure>
   </div>
@@ -261,26 +274,6 @@
   </div>
 </section>
 
-<!-- ===================== LIBRARY ===================== -->
-<section id="library">
-  <div class="wrap">
-    <div class="eyebrow"><span class="num">06</span> Global Instance Library</div>
-    <h2 class="sec-title">A structured object-level scene memory</h2>
-    <p class="lead">
-      Local instances of the same physical object across subsequences are consolidated into persistent global records —
-      each maintaining object geometry, global 3D location, and spatial relations. This can serve as a 3D memory basis for
-      downstream VLMs to perform object querying and scene-level reasoning.
-    </p>
-    <figure class="figure reveal">
-      <img src="assets/figs/library.png" alt="Global instance library" data-zoom />
-      <figcaption>
-        <b>Global Instance Library.</b> From local instance libraries and reconstructed geometry, LIST3R updates instance
-        evidence and organizes records into a global 3D instance library with object-level geometry, location and relations.
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
 <!-- ===================== FOOTER / CITE ===================== -->
 <footer>
   <div class="wrap">
@@ -298,6 +291,6 @@
 
 <div class="lightbox" id="lightbox"><img src="" alt="zoom" /></div>
 
-<script src="app.js?v=2"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>

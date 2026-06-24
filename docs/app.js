@@ -72,7 +72,7 @@
     "Scal3R": "Scal3R", "Pi-Long": "π-Long", "LIST3R": "LIST3R",
   };
   const BASE = "assets/turntable";
-  const V = "2"; // cache-bust: bump when turntable frames are re-rendered
+  const V = "3"; // cache-bust: bump when turntable frames are re-rendered
 
   let manifest = null;
   let nFrames = 30;
@@ -189,7 +189,7 @@
       frame = (frame + 1) % nFrames;
       slider.value = frame;
       paint();
-    }, 90);
+    }, 180);
   }
   function togglePlay() { playing ? pause() : play(); }
   function play() { playing = true; playBtn.textContent = "⏸ Pause"; playBtn.classList.add("on"); }
