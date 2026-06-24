@@ -22,8 +22,8 @@
       }
     },
     {
-      "id": "bonn_box",
-      "label": "BONN placing box",
+      "id": "tum_room",
+      "label": "TUM fr1 room",
       "methods": {
         "CUT3R": true,
         "TTT3R": true,
@@ -34,8 +34,8 @@
       }
     },
     {
-      "id": "f3_sitting_xyz",
-      "label": "TUM fr3 sitting xyz",
+      "id": "tum_hemisphere",
+      "label": "TUM fr2/360 hemisphere",
       "methods": {
         "CUT3R": true,
         "TTT3R": true,
@@ -46,8 +46,8 @@
       }
     },
     {
-      "id": "large_loop",
-      "label": "Large Loop",
+      "id": "eth3d_desk_changing_1",
+      "label": "ETH3D desk_changing_1",
       "methods": {
         "CUT3R": true,
         "TTT3R": true,
