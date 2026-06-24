@@ -34,8 +34,8 @@
       }
     },
     {
-      "id": "nrgbd_kitchen",
-      "label": "NRGBD kitchen",
+      "id": "nrgbd_breakfast_room",
+      "label": "NRGBD breakfast room",
       "methods": {
         "CUT3R": true,
         "TTT3R": true,
