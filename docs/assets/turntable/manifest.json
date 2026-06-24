@@ -10,8 +10,8 @@
   ],
   "scenes": [
     {
-      "id": "tum_kidnap",
-      "label": "TUM fr2/360 kidnap",
+      "id": "scene_01",
+      "label": "1",
       "methods": {
         "CUT3R": true,
         "TTT3R": true,
@@ -22,8 +22,8 @@
       }
     },
     {
-      "id": "bonn_removing_box",
-      "label": "BONN removing obstructing box",
+      "id": "scene_02",
+      "label": "2",
       "methods": {
         "CUT3R": true,
         "TTT3R": true,
@@ -34,8 +34,8 @@
       }
     },
     {
-      "id": "nrgbd_green_room",
-      "label": "NRGBD green room",
+      "id": "scene_03",
+      "label": "3",
       "methods": {
         "CUT3R": true,
         "TTT3R": true,
@@ -46,8 +46,32 @@
       }
     },
     {
-      "id": "eth3d_desk_changing_1",
-      "label": "ETH3D desk_changing_1",
+      "id": "scene_04",
+      "label": "4",
+      "methods": {
+        "CUT3R": true,
+        "TTT3R": true,
+        "VGGT-Long": true,
+        "Scal3R": true,
+        "Pi-Long": true,
+        "LIST3R": true
+      }
+    },
+    {
+      "id": "scene_05",
+      "label": "5",
+      "methods": {
+        "CUT3R": true,
+        "TTT3R": true,
+        "VGGT-Long": true,
+        "Scal3R": true,
+        "Pi-Long": true,
+        "LIST3R": true
+      }
+    },
+    {
+      "id": "scene_06",
+      "label": "6",
       "methods": {
         "CUT3R": true,
         "TTT3R": true,
