@@ -22,8 +22,8 @@
       }
     },
     {
-      "id": "tum_room",
-      "label": "TUM fr1 room",
+      "id": "bonn_removing_box",
+      "label": "BONN removing obstructing box",
       "methods": {
         "CUT3R": true,
         "TTT3R": true,
@@ -34,8 +34,8 @@
       }
     },
     {
-      "id": "tum_hemisphere",
-      "label": "TUM fr2/360 hemisphere",
+      "id": "nrgbd_grey_white_room",
+      "label": "NRGBD grey white room",
       "methods": {
         "CUT3R": true,
         "TTT3R": true,
