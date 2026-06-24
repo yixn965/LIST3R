@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="midnight">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LIST3R · Long-sequence Instance-aware 3D Reconstruction</title>
+<meta name="description" content="LIST3R uses persistent object instances as anchors to organize long-sequence 3D reconstruction, recovering long-range revisits and producing globally consistent camera trajectories and point clouds." />
+<link rel="stylesheet" href="styles.css?v=2" />
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="top">
+  <div class="inner">
+    <div class="logo">LIST<span class="dot">3</span>R</div>
+    <div class="links">
+      <a href="#overview">Overview</a>
+      <a href="#method">Method</a>
+      <a href="#compare">3D Compare</a>
+      <a href="#trajectory">Trajectory</a>
+      <a href="#geometry">Geometry</a>
+      <a href="#library">Library</a>
+    </div>
+    <div class="theme-switch" title="Switch theme">
+      <button class="sw-midnight active" data-set="midnight" aria-label="Midnight theme"></button>
+      <button class="sw-aurora" data-set="aurora" aria-label="Aurora theme"></button>
+      <button class="sw-sand" data-set="sand" aria-label="Sand theme"></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap">
+    <h1>LIST3R: <span class="grad">Long-sequence Instance-aware</span> 3D Reconstruction</h1>
+    <p class="sub">Using persistent object instances as anchors to organize long-horizon 3D reconstruction.</p>
+    <div class="authors">Jing Gao &nbsp;·&nbsp; Wei Wang &nbsp;·&nbsp; Feiran Wang &nbsp;·&nbsp; Yan Yan</div>
+    <div class="affil">Beijing Jiaotong University &nbsp;·&nbsp; Illinois Institute of Technology &nbsp;·&nbsp; University of Illinois Chicago</div>
+    <div class="badges">
+      <a class="badge primary" href="#compare">▶ Interactive 3D Comparison</a>
+      <a class="badge" href="#">📄 Paper (PDF)</a>
+      <a class="badge" href="#">⟨ / ⟩ Code</a>
+      <a class="badge" href="#method">🧭 Method</a>
+    </div>
+
+    <figure class="teaser-fig reveal">
+      <img src="assets/figs/teaser.png" alt="LIST3R teaser" data-zoom />
+      <figcaption class="teaser-cap">
+        LIST3R leverages instance guidance to recover more effective <b>revisits</b> and smoother
+        <b>cross-subsequence alignment</b>, producing more accurate and stable camera trajectories than the baseline.
+      </figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- ===================== OVERVIEW / ABSTRACT ===================== -->
+<section id="overview">
+  <div class="wrap">
+    <div class="eyebrow"><span class="num">01</span> Overview</div>
+    <h2 class="sec-title">Organizing long visual experiences around stable instances</h2>
+    <div class="abstract-box reveal">
+      <p style="margin-top:0">
+        Long-sequence 3D reconstruction must <b>maintain persistent anchors</b> across time and viewpoint change,
+        <b>re-identify revisited places</b> over long horizons, and <b>integrate partial reconstructions</b> into a
+        globally consistent representation. Streaming methods gradually forget early scene information, while
+        subsequence-based methods retain strong local geometry but struggle to organize observations over long spans.
+      </p>
+      <p style="margin-bottom:0">
+        <b>LIST3R</b> is an instance-aware framework that uses recognizable object instances as persistent scene anchors.
+        It builds a local instance library for each subsequence, uses instance evidence to discover long-range revisits and
+        guide object-aware fragment alignment, and consolidates everything into a global 3D instance library — yielding more
+        accurate trajectories and higher-quality point clouds across the full sequence.
+      </p>
+    </div>
+
+    <div class="cards" style="margin-top:28px">
+      <div class="card reveal">
+        <div class="ic">🧷</div>
+        <h3>Persistent instance anchors</h3>
+        <p>Trackable object-centric cues organize fragmented observations into stable, recallable local libraries.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic">🔁</div>
+        <h3>Long-range revisit discovery</h3>
+        <p>Instance semantic + spatial-layout consistency recovers revisits that frame-level similarity alone misses.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic">🧩</div>
+        <h3>Globally consistent fusion</h3>
+        <p>Instance-aware merging and confidence-weighted graph optimization assemble subsequences into a coherent scene.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== METHOD ===================== -->
+<section id="method">
+  <div class="wrap">
+    <div class="eyebrow"><span class="num">02</span> Method</div>
+    <h2 class="sec-title">A three-stage instance-anchored pipeline</h2>
+    <p class="lead">
+      LIST3R partitions a long video into overlapping subsequences reconstructed by a feed-forward 3D foundation model
+      (π³), then anchors the whole process on object instances.
+    </p>
+
+    <figure class="figure reveal">
+      <img src="assets/figs/method_pipeline.png" alt="LIST3R method overview" data-zoom />
+      <figcaption>
+        <b>Method overview.</b> LIST3R first builds a local instance library for each subsequence to capture recognizable
+        object cues. These cues connect subsequences and assemble fragmented local reconstructions into a coherent global
+        scene. Instance evidence is continuously updated and finally consolidated into a global instance library.
+      </figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="n">01</div>
+        <h4>Local Instance Library</h4>
+        <p>Sample anchor frames, discover query-based instances, and propagate masks with SAM3 to form temporally
+           consistent instance records — object features, visible frames, and 2D locations per subsequence.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">02</div>
+        <h4>Instance-guided Association</h4>
+        <p>Instance-enhanced long-range revisit discovery, instance-aware subsequence merging that keeps structurally
+           informative objects, and confidence-weighted Sim(3) graph optimization for global consistency.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">03</div>
+        <h4>Global Instance Library</h4>
+        <p>Local instances of the same physical object are merged into persistent global records with geometry, global
+           location, and spatial relations — a structured scene-level 3D memory.</p>
+      </div>
+    </div>
+
+    <figure class="figure reveal" style="margin-top:26px">
+      <img src="assets/figs/part2.png" alt="Instance-guided cross-subsequence association" data-zoom />
+      <figcaption>
+        <b>Instance-guided cross-subsequence association.</b> From local instance libraries and per-subsequence
+        reconstructions, LIST3R establishes reliable connections via long-range revisit discovery and instance-aware
+        merging. Adjacent and loop edges are optimized in a global association graph to obtain aligned subsequences.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== INTERACTIVE 3D COMPARE ===================== -->
+<section id="compare">
+  <div class="wrap">
+    <div class="eyebrow"><span class="num">03</span> Interactive 3D Comparison</div>
+    <h2 class="sec-title">Spin &amp; compare the reconstructed point clouds</h2>
+    <p class="lead">
+      Real fused point clouds from each method on NRGBD scenes. <b>Drag</b> a panel left/right to rotate it 180°, or hit
+      <b>Play</b> to auto-spin all panels in sync. LIST3R (highlighted) preserves cleaner structure and fewer
+      misalignment artifacts.
+    </p>
+
+    <div class="tt-toolbar reveal">
+      <div class="group">
+        <label>Scene</label>
+        <div class="scene-tabs" id="sceneTabs"></div>
+      </div>
+      <div class="tt-controls">
+        <button class="btn play on" id="playBtn">⏸ Pause</button>
+        <input type="range" id="angleSlider" min="0" max="29" value="0" style="width:160px" />
+      </div>
+    </div>
+
+    <div class="viewer-grid" id="viewerGrid">
+      <div class="tt-loading">Loading point-cloud turntables…</div>
+    </div>
+    <p class="tt-note">
+      Point clouds are downsampled (~200k points) and canonically oriented for fair, side-by-side comparison.
+      CUT3R &amp; TTT3R are streaming; VGGT-Long, π-Long and Scal3R are subsequence-based baselines.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== TRAJECTORY ===================== -->
+<section id="trajectory">
+  <div class="wrap">
+    <div class="eyebrow"><span class="num">04</span> Camera Trajectory</div>
+    <h2 class="sec-title">More accurate long-sequence camera trajectories</h2>
+    <p class="lead">
+      Directly running VGGT or π³ on full long sequences runs out of memory. Among scalable methods, LIST3R achieves the
+      best ATE on all three benchmarks — the metric most directly reflecting whether local subsequences are correctly
+      connected into a coherent global trajectory.
+    </p>
+
+    <div class="table-wrap reveal">
+      <table class="metrics">
+        <thead>
+          <tr>
+            <th rowspan="2">Method</th>
+            <th colspan="3">TUM</th>
+            <th colspan="3">ETH3D</th>
+            <th colspan="3">BONN</th>
+          </tr>
+          <tr>
+            <th>ATE↓</th><th>RTE↓</th><th>RRE↓</th>
+            <th>ATE↓</th><th>RTE↓</th><th>RRE↓</th>
+            <th>ATE↓</th><th>RTE↓</th><th>RRE↓</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>CUT3R</td><td>0.866</td><td>0.963</td><td>40.19</td><td>2.895</td><td>2.537</td><td>43.04</td><td>0.319</td><td class="best">0.561</td><td>58.13</td></tr>
+          <tr><td>TTT3R</td><td>0.317</td><td>0.385</td><td>9.92</td><td>1.317</td><td>0.939</td><td>10.33</td><td>0.149</td><td>0.759</td><td>47.51</td></tr>
+          <tr><td>VGGT-Long</td><td>0.325</td><td>0.489</td><td>25.21</td><td>1.292</td><td>1.701</td><td>32.92</td><td>0.123</td><td>0.787</td><td>47.43</td></tr>
+          <tr><td>π-Long</td><td>0.208</td><td>0.279</td><td>7.81</td><td>0.562</td><td>0.455</td><td>13.65</td><td>0.094</td><td>0.770</td><td>48.01</td></tr>
+          <tr><td>Scal3R</td><td>0.267</td><td>0.329</td><td class="best">5.72</td><td>0.807</td><td>0.590</td><td class="best">7.00</td><td>0.117</td><td>0.779</td><td>49.09</td></tr>
+          <tr class="ours"><td>LIST3R (Ours)</td><td class="best">0.150</td><td class="best">0.211</td><td>6.97</td><td class="best">0.516</td><td class="best">0.444</td><td>9.32</td><td class="best">0.085</td><td>0.779</td><td class="best">45.89</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbl-cap">Camera pose estimation on long sequences. ATE / RTE in meters, RRE in degrees — all lower is better. <span class="best">Green</span> = best.</p>
+
+    <figure class="figure reveal" style="margin-top:24px">
+      <img src="assets/figs/camera_pose3.png" alt="Estimated long-sequence camera trajectories" data-zoom />
+      <figcaption><b>Estimated long-sequence camera trajectories.</b> Compared with baselines, LIST3R follows the
+        reference trajectory more closely, especially where accumulated drift becomes visible.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== GEOMETRY ===================== -->
+<section id="geometry">
+  <div class="wrap">
+    <div class="eyebrow"><span class="num">05</span> Point Cloud Geometry</div>
+    <h2 class="sec-title">Higher-quality fused geometry</h2>
+    <p class="lead">
+      On ETH3D, LIST3R is best across all five metrics; on NRGBD it leads on Chamfer, accuracy, completeness and F-score.
+      Gains are clearest in completeness and F-score — exactly the metrics that depend on whether subsequences are
+      correctly merged into a coherent scene.
+    </p>
+
+    <div class="table-wrap reveal">
+      <table class="metrics">
+        <thead>
+          <tr><th rowspan="2">Method</th><th colspan="5">ETH3D</th><th colspan="5">NRGBD</th></tr>
+          <tr>
+            <th>Chamfer↓</th><th>Acc↓</th><th>Comp↓</th><th>NC↑</th><th>F@5↑</th>
+            <th>Chamfer↓</th><th>Acc↓</th><th>Comp↓</th><th>NC↑</th><th>F@5↑</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>CUT3R</td><td>140.0</td><td>62.8</td><td>217.3</td><td>0.536</td><td>4.0</td><td>73.2</td><td>50.1</td><td>96.4</td><td>0.575</td><td>9.0</td></tr>
+          <tr><td>TTT3R</td><td>102.6</td><td>36.6</td><td>168.6</td><td>0.610</td><td>7.3</td><td>41.3</td><td>26.2</td><td>56.4</td><td>0.647</td><td>22.2</td></tr>
+          <tr><td>VGGT-Long</td><td>50.6</td><td>56.7</td><td>44.4</td><td>0.618</td><td>19.8</td><td>6.1</td><td>5.3</td><td>6.9</td><td>0.857</td><td>68.9</td></tr>
+          <tr><td>π-Long</td><td>41.5</td><td>37.8</td><td>45.3</td><td>0.686</td><td>32.7</td><td>5.0</td><td>4.4</td><td>5.5</td><td class="best">0.876</td><td>68.9</td></tr>
+          <tr><td>Scal3R</td><td>33.8</td><td>36.5</td><td>31.1</td><td>0.658</td><td>26.2</td><td>7.7</td><td>4.2</td><td>11.1</td><td>0.829</td><td>71.2</td></tr>
+          <tr class="ours"><td>LIST3R (Ours)</td><td class="best">27.4</td><td class="best">31.1</td><td class="best">23.6</td><td class="best">0.709</td><td class="best">36.5</td><td class="best">4.7</td><td class="best">4.1</td><td class="best">5.3</td><td>0.875</td><td class="best">73.4</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbl-cap">Point cloud reconstruction quality. Chamfer / Acc / Comp in cm. <span class="best">Green</span> = best.</p>
+
+    <figure class="figure reveal" style="margin-top:24px">
+      <img src="assets/figs/cloud_vis.png" alt="Qualitative long-sequence reconstruction" data-zoom />
+      <figcaption><b>Qualitative results for long-sequence 3D reconstruction.</b></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== LIBRARY ===================== -->
+<section id="library">
+  <div class="wrap">
+    <div class="eyebrow"><span class="num">06</span> Global Instance Library</div>
+    <h2 class="sec-title">A structured object-level scene memory</h2>
+    <p class="lead">
+      Local instances of the same physical object across subsequences are consolidated into persistent global records —
+      each maintaining object geometry, global 3D location, and spatial relations. This can serve as a 3D memory basis for
+      downstream VLMs to perform object querying and scene-level reasoning.
+    </p>
+    <figure class="figure reveal">
+      <img src="assets/figs/library.png" alt="Global instance library" data-zoom />
+      <figcaption>
+        <b>Global Instance Library.</b> From local instance libraries and reconstructed geometry, LIST3R updates instance
+        evidence and organizes records into a global 3D instance library with object-level geometry, location and relations.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== FOOTER / CITE ===================== -->
+<footer>
+  <div class="wrap">
+    <h2 class="sec-title" style="font-size:1.3rem">BibTeX</h2>
+    <div class="cite-box" id="citeBox">@inproceedings{gao2026list3r,
+  title     = {LIST3R: Long-sequence Instance-aware 3D Reconstruction},
+  author    = {Gao, Jing and Wang, Wei and Wang, Feiran and Yan, Yan},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2026}
+}<button id="copyCite">Copy</button></div>
+    <p style="margin-top:22px">© 2026 LIST3R. Project page for academic use. Reconstructions shown are on public benchmarks
+      (TUM, ETH3D, BONN, NRGBD, 7-Scenes).</p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox"><img src="" alt="zoom" /></div>
+
+<script src="app.js?v=2"></script>
+</body>
+</html>

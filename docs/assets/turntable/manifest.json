@@ -1,0 +1,61 @@
+{
+  "n_frames": 30,
+  "methods": [
+    "CUT3R",
+    "TTT3R",
+    "VGGT-Long",
+    "Scal3R",
+    "Pi-Long",
+    "LIST3R"
+  ],
+  "scenes": [
+    {
+      "id": "tum_kidnap",
+      "label": "TUM fr2/360 kidnap",
+      "methods": {
+        "CUT3R": true,
+        "TTT3R": true,
+        "VGGT-Long": true,
+        "Scal3R": true,
+        "Pi-Long": true,
+        "LIST3R": true
+      }
+    },
+    {
+      "id": "bonn_box",
+      "label": "BONN placing box",
+      "methods": {
+        "CUT3R": true,
+        "TTT3R": true,
+        "VGGT-Long": true,
+        "Scal3R": true,
+        "Pi-Long": true,
+        "LIST3R": true
+      }
+    },
+    {
+      "id": "f3_sitting_xyz",
+      "label": "TUM fr3 sitting xyz",
+      "methods": {
+        "CUT3R": true,
+        "TTT3R": true,
+        "VGGT-Long": true,
+        "Scal3R": true,
+        "Pi-Long": true,
+        "LIST3R": true
+      }
+    },
+    {
+      "id": "large_loop",
+      "label": "Large Loop",
+      "methods": {
+        "CUT3R": true,
+        "TTT3R": true,
+        "VGGT-Long": true,
+        "Scal3R": true,
+        "Pi-Long": true,
+        "LIST3R": true
+      }
+    }
+  ]
+}
