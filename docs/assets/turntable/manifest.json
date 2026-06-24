@@ -34,8 +34,8 @@
       }
     },
     {
-      "id": "nrgbd_grey_white_room",
-      "label": "NRGBD grey white room",
+      "id": "nrgbd_kitchen",
+      "label": "NRGBD kitchen",
       "methods": {
         "CUT3R": true,
         "TTT3R": true,
