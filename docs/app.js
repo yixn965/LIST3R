@@ -72,7 +72,7 @@
     "Scal3R": "Scal3R", "Pi-Long": "π-Long", "LIST3R": "LIST3R",
   };
   const BASE = "assets/turntable";
-  const V = "9"; // cache-bust: bump when turntable frames are re-rendered
+  const V = "10"; // cache-bust: bump when turntable frames are re-rendered
 
   let manifest = null;
   let nFrames = 30;
