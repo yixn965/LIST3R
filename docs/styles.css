@@ -1,6 +1,6 @@
 /* ============================================================
    LIST3R project page
-   Multi-theme palette, switchable via [data-theme] on <html>.
+   Single white theme.
    ============================================================ */
 :root {
   --maxw: 1180px;
@@ -11,55 +11,19 @@
   --t: .35s cubic-bezier(.4,0,.2,1);
   --mono: "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
 
-/* ---------- Theme: Midnight (default) ---------- */
-:root[data-theme="midnight"] {
-  --bg: #0c1020;
-  --bg2: #131a30;
-  --panel: #181f38;
-  --panel2: #1f2845;
-  --text: #eef1f8;
-  --muted: #9aa6c4;
-  --line: rgba(255,255,255,.09);
-  --brand: #6ea8ff;
-  --brand2: #b07cff;
-  --accent: #41e0c4;
-  --hero-grad: radial-gradient(1200px 600px at 70% -10%, #243a7a55, transparent 60%),
-               radial-gradient(900px 500px at 10% 10%, #5e2f9a44, transparent 55%);
-  --canvas-bg: #0a0e1c;
-}
-/* ---------- Theme: Aurora (light) ---------- */
-:root[data-theme="aurora"] {
-  --bg: #f5f7fc;
+  --bg: #ffffff;
   --bg2: #ffffff;
   --panel: #ffffff;
-  --panel2: #f0f3fb;
+  --panel2: #f5f7fa;
   --text: #16203a;
   --muted: #5d6b8c;
   --line: rgba(20,30,60,.10);
   --brand: #3563e9;
   --brand2: #8b46e6;
   --accent: #11b3a0;
-  --hero-grad: radial-gradient(1100px 560px at 75% -10%, #c9dbff88, transparent 60%),
-               radial-gradient(800px 460px at 8% 0%, #e6d4ff88, transparent 55%);
-  --canvas-bg: #eef2fb;
-}
-/* ---------- Theme: Sand (warm) ---------- */
-:root[data-theme="sand"] {
-  --bg: #14110d;
-  --bg2: #1c1813;
-  --panel: #221d16;
-  --panel2: #2c261c;
-  --text: #f6efe4;
-  --muted: #b6a892;
-  --line: rgba(255,240,210,.10);
-  --brand: #e0a857;
-  --brand2: #e57b5a;
-  --accent: #7fc8a0;
-  --hero-grad: radial-gradient(1100px 560px at 72% -10%, #6b4a2055, transparent 60%),
-               radial-gradient(820px 480px at 6% 5%, #7d3a2a44, transparent 55%);
-  --canvas-bg: #0f0c08;
+  --hero-grad: none;
+  --canvas-bg: #f5f7fa;
 }
 
 * { box-sizing: border-box; }
@@ -96,18 +60,6 @@ nav.top .links a {
   font-size: .9rem; font-weight: 600; transition: var(--t);
 }
 nav.top .links a:hover { color: var(--text); background: var(--panel2); text-decoration: none; }
-
-/* theme switch */
-.theme-switch { display: flex; gap: 6px; align-items: center; }
-.theme-switch button {
-  width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--line);
-  cursor: pointer; padding: 0; transition: transform .2s;
-}
-.theme-switch button:hover { transform: scale(1.15); }
-.theme-switch button.active { border-color: var(--text); }
-.sw-midnight { background: linear-gradient(135deg,#0c1020,#6ea8ff); }
-.sw-aurora { background: linear-gradient(135deg,#fff,#3563e9); }
-.sw-sand { background: linear-gradient(135deg,#221d16,#e0a857); }
 
 /* ---------- Hero ---------- */
 header.hero {

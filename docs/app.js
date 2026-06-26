@@ -2,26 +2,6 @@
    LIST3R project page — interactions
    ============================================================ */
 
-/* ---------- Theme switching (persisted) ---------- */
-(function themes() {
-  const root = document.documentElement;
-  const saved = localStorage.getItem("list3r-theme");
-  if (saved) root.setAttribute("data-theme", saved);
-  document.querySelectorAll(".theme-switch button").forEach((b) => {
-    if (b.dataset.set === root.getAttribute("data-theme")) {
-      document.querySelectorAll(".theme-switch button").forEach((x) => x.classList.remove("active"));
-      b.classList.add("active");
-    }
-    b.addEventListener("click", () => {
-      const t = b.dataset.set;
-      root.setAttribute("data-theme", t);
-      localStorage.setItem("list3r-theme", t);
-      document.querySelectorAll(".theme-switch button").forEach((x) => x.classList.remove("active"));
-      b.classList.add("active");
-    });
-  });
-})();
-
 /* ---------- Scroll reveal ---------- */
 (function reveal() {
   const io = new IntersectionObserver(
@@ -72,7 +52,7 @@
     "Scal3R": "Scal3R", "Pi-Long": "π-Long", "LIST3R": "LIST3R",
   };
   const BASE = "assets/turntable";
-  const V = "10"; // cache-bust: bump when turntable frames are re-rendered
+  const V = "11"; // cache-bust: bump when turntable frames are re-rendered
 
   let manifest = null;
   let nFrames = 30;
@@ -165,7 +145,7 @@
     const arr = [];
     for (let i = 0; i < nFrames; i++) {
       const im = new Image();
-      im.src = `${BASE}/${scene}/${method}/frame_${String(i).padStart(2, "0")}.png?v=${V}`;
+      im.src = `${BASE}/${scene}/${method}/frame_${String(i).padStart(2, "0")}.jpg?v=${V}`;
       arr.push(im);
     }
     cache[key] = arr;
