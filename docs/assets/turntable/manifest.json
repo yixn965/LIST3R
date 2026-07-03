@@ -1,0 +1,78 @@
+{
+  "n_frames": 30,
+  "methods": [
+    "CUT3R",
+    "TTT3R",
+    "VGGT-Long",
+    "Scal3R",
+    "LIST3R"
+  ],
+  "scenes": [
+    {
+      "id": "scene_01",
+      "label": "1",
+      "methods": {
+        "CUT3R": true,
+        "TTT3R": true,
+        "VGGT-Long": true,
+        "Scal3R": true,
+        "LIST3R": true
+      }
+    },
+    {
+      "id": "scene_02",
+      "label": "2",
+      "methods": {
+        "CUT3R": true,
+        "TTT3R": true,
+        "VGGT-Long": true,
+        "Scal3R": true,
+        "LIST3R": true
+      }
+    },
+    {
+      "id": "scene_03",
+      "label": "3",
+      "methods": {
+        "CUT3R": true,
+        "TTT3R": true,
+        "VGGT-Long": true,
+        "Scal3R": true,
+        "LIST3R": true
+      }
+    },
+    {
+      "id": "scene_04",
+      "label": "4",
+      "methods": {
+        "CUT3R": true,
+        "TTT3R": true,
+        "VGGT-Long": true,
+        "Scal3R": true,
+        "LIST3R": true
+      }
+    },
+    {
+      "id": "scene_05",
+      "label": "5",
+      "methods": {
+        "CUT3R": true,
+        "TTT3R": true,
+        "VGGT-Long": true,
+        "Scal3R": true,
+        "LIST3R": true
+      }
+    },
+    {
+      "id": "scene_06",
+      "label": "6",
+      "methods": {
+        "CUT3R": true,
+        "TTT3R": true,
+        "VGGT-Long": true,
+        "Scal3R": true,
+        "LIST3R": true
+      }
+    }
+  ]
+}

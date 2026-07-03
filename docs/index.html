@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LIST3R · Long-sequence Instance-aware 3D Reconstruction</title>
+<meta name="description" content="LIST3R uses persistent object instances as anchors to organize long-sequence 3D reconstruction, recovering long-range revisits and producing globally consistent camera trajectories and point clouds." />
+<link rel="stylesheet" href="styles.css?v=12" />
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="top">
+  <div class="inner">
+    <div class="logo">LIST<span class="dot">3</span>R</div>
+    <div class="links">
+      <a href="#overview">Overview</a>
+      <a href="#method">Method</a>
+      <a href="#visualizations">Visualizations</a>
+      <a href="#quantitative">Quantitative</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap">
+    <h1>LIST3R: <span class="grad">Long-sequence Instance-aware</span> 3D Reconstruction</h1>
+    <p class="sub">Using persistent object instances as anchors to organize long-horizon 3D reconstruction.</p>
+    <div class="authors">Jing Gao &nbsp;·&nbsp; Wei Wang &nbsp;·&nbsp; Feiran Wang &nbsp;·&nbsp; Yan Yan</div>
+    <div class="affil">Beijing Jiaotong University &nbsp;·&nbsp; University of Illinois Chicago</div>
+    <div class="badges">
+      <a class="badge primary" href="#visualizations">▶ Interactive 3D Comparison</a>
+      <a class="badge" href="#">📄 Paper (PDF)</a>
+      <a class="badge" href="https://github.com/yixn965/LIST3R" target="_blank" rel="noopener">💻 Code</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== OVERVIEW / ABSTRACT ===================== -->
+<section id="overview">
+  <div class="wrap">
+    <h2 class="sec-title">Overview</h2>
+    <div class="abstract-box reveal">
+      <p style="margin-top:0">
+        We present <b>LIST3R</b>, an instance-aware framework for long-sequence 3D reconstruction inspired by the way
+        humans organize spatial memory around stable and recognizable objects. LIST3R organizes long-sequence
+        reconstruction around instance anchors, using them to reconnect fragmented subsequences and consolidate local
+        observations into a coherent global 3D scene. Given a long video, our approach partitions it into overlapping
+        subsequences and builds a local instance library for each partial reconstruction, maintaining trackable anchors
+        with semantic and geometric evidence. These anchors are matched across subsequences to recover revisited regions
+        and provide object-aware constraints for fragment alignment, producing a global reconstruction. During this
+        process, the evolving geometric evidence updates the local instance libraries and progressively organizes them
+        into a unified global 3D instance library. Experiments on long-sequence benchmarks show that our method produces
+        more accurate trajectories and higher-quality 3D reconstructions, highlighting the effectiveness of persistent
+        instance anchors for organizing long-horizon 3D reconstruction.
+      </p>
+    </div>
+
+    <figure class="teaser-fig reveal" style="margin-top:28px">
+      <img src="assets/figs/teaser.png" alt="LIST3R teaser" data-zoom />
+      <figcaption class="teaser-cap">
+        LIST3R leverages instance guidance to recover more effective <b>revisits</b> and smoother
+        <b>cross-subsequence alignment</b>, producing more accurate and stable camera trajectories than the baseline.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== METHOD ===================== -->
+<section id="method">
+  <div class="wrap">
+    <h2 class="sec-title">Method</h2>
+    <p class="lead wide">
+      Our core idea is to use recognizable object instances as persistent anchors throughout the reconstruction process.
+      Our method follows a three-stage pipeline. First, we build a local instance library for each subsequence,
+      organizing partial reconstructions around trackable object-centric cues. Second, these local instance libraries are
+      used to establish cross-subsequence associations, including long-range revisit discovery and instance-aware
+      subsequence merging, which are further refined by confidence-weighted optimization for global consistency. Finally,
+      local instance observations are consolidated into a unified 3D instance library.
+    </p>
+
+    <figure class="figure reveal">
+      <img src="assets/figs/method_pipeline.png" alt="LIST3R method overview" data-zoom />
+      <figcaption>
+        <b>Method overview.</b> LIST3R first builds a local instance library for each subsequence to capture recognizable
+        object cues. These cues connect subsequences and assemble fragmented local reconstructions into a coherent global
+        scene. Instance evidence is continuously updated and finally consolidated into a global instance library.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== VISUALIZATIONS ===================== -->
+<section id="visualizations">
+  <div class="wrap">
+    <h2 class="sec-title">Visualizations</h2>
+
+    <div class="tt-toolbar reveal">
+      <div class="group">
+        <label>Scene</label>
+        <div class="scene-tabs" id="sceneTabs"></div>
+      </div>
+      <div class="tt-controls">
+        <button class="btn play on" id="playBtn">⏸ Pause</button>
+        <input type="range" id="angleSlider" min="0" max="29" value="0" style="width:160px" />
+      </div>
+    </div>
+
+    <div class="viewer-grid" id="viewerGrid">
+      <div class="tt-loading">Loading point-cloud turntables…</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUANTITATIVE ===================== -->
+<section id="quantitative">
+  <div class="wrap">
+    <h2 class="sec-title">Quantitative Analysis</h2>
+
+    <div class="table-wrap reveal">
+      <table class="metrics">
+        <thead>
+          <tr>
+            <th rowspan="2">Method</th>
+            <th colspan="3">TUM</th>
+            <th colspan="3">ETH3D</th>
+            <th colspan="3">BONN</th>
+          </tr>
+          <tr>
+            <th>ATE↓</th><th>RTE↓</th><th>RRE↓</th>
+            <th>ATE↓</th><th>RTE↓</th><th>RRE↓</th>
+            <th>ATE↓</th><th>RTE↓</th><th>RRE↓</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>CUT3R</td><td>0.866</td><td>0.963</td><td>40.19</td><td>2.895</td><td>2.537</td><td>43.04</td><td>0.319</td><td class="best">0.561</td><td>58.13</td></tr>
+          <tr><td>TTT3R</td><td>0.317</td><td>0.385</td><td>9.92</td><td>1.317</td><td>0.939</td><td>10.33</td><td>0.149</td><td>0.759</td><td>47.51</td></tr>
+          <tr><td>VGGT-Long</td><td>0.325</td><td>0.489</td><td>25.21</td><td>1.292</td><td>1.701</td><td>32.92</td><td>0.123</td><td>0.787</td><td>47.43</td></tr>
+          <tr><td>π-Long</td><td>0.208</td><td>0.279</td><td>7.81</td><td>0.562</td><td>0.455</td><td>13.65</td><td>0.094</td><td>0.770</td><td>48.01</td></tr>
+          <tr><td>Scal3R</td><td>0.267</td><td>0.329</td><td class="best">5.72</td><td>0.807</td><td>0.590</td><td class="best">7.00</td><td>0.117</td><td>0.779</td><td>49.09</td></tr>
+          <tr class="ours"><td>LIST3R (Ours)</td><td class="best">0.150</td><td class="best">0.211</td><td>6.97</td><td class="best">0.516</td><td class="best">0.444</td><td>9.32</td><td class="best">0.085</td><td>0.779</td><td class="best">45.89</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbl-cap">Camera pose estimation on long sequences. ATE / RTE in meters, RRE in degrees — all lower is better. <span class="best">Green</span> = best.</p>
+
+    <figure class="figure reveal" style="margin-top:24px">
+      <img src="assets/figs/camera_pose3.png" alt="Estimated long-sequence camera trajectories" data-zoom />
+      <figcaption><b>Estimated long-sequence camera trajectories.</b></figcaption>
+    </figure>
+
+    <div class="table-wrap reveal" style="margin-top:34px">
+      <table class="metrics">
+        <thead>
+          <tr><th rowspan="2">Method</th><th colspan="5">ETH3D</th><th colspan="5">NRGBD</th></tr>
+          <tr>
+            <th>Chamfer↓</th><th>Acc↓</th><th>Comp↓</th><th>NC↑</th><th>F@5↑</th>
+            <th>Chamfer↓</th><th>Acc↓</th><th>Comp↓</th><th>NC↑</th><th>F@5↑</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>CUT3R</td><td>140.0</td><td>62.8</td><td>217.3</td><td>0.536</td><td>4.0</td><td>73.2</td><td>50.1</td><td>96.4</td><td>0.575</td><td>9.0</td></tr>
+          <tr><td>TTT3R</td><td>102.6</td><td>36.6</td><td>168.6</td><td>0.610</td><td>7.3</td><td>41.3</td><td>26.2</td><td>56.4</td><td>0.647</td><td>22.2</td></tr>
+          <tr><td>VGGT-Long</td><td>50.6</td><td>56.7</td><td>44.4</td><td>0.618</td><td>19.8</td><td>6.1</td><td>5.3</td><td>6.9</td><td>0.857</td><td>68.9</td></tr>
+          <tr><td>π-Long</td><td>41.5</td><td>37.8</td><td>45.3</td><td>0.686</td><td>32.7</td><td>5.0</td><td>4.4</td><td>5.5</td><td class="best">0.876</td><td>68.9</td></tr>
+          <tr><td>Scal3R</td><td>33.8</td><td>36.5</td><td>31.1</td><td>0.658</td><td>26.2</td><td>7.7</td><td>4.2</td><td>11.1</td><td>0.829</td><td>71.2</td></tr>
+          <tr class="ours"><td>LIST3R (Ours)</td><td class="best">27.4</td><td class="best">31.1</td><td class="best">23.6</td><td class="best">0.709</td><td class="best">36.5</td><td class="best">4.7</td><td class="best">4.1</td><td class="best">5.3</td><td>0.875</td><td class="best">73.4</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbl-cap">Point cloud reconstruction quality. Chamfer / Acc / Comp in cm. <span class="best">Green</span> = best.</p>
+
+    <figure class="figure reveal" style="margin-top:24px">
+      <img src="assets/figs/cloud_vis.png" alt="Qualitative long-sequence reconstruction" data-zoom />
+      <figcaption><b>Qualitative results for long-sequence 3D reconstruction.</b></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== FOOTER / CITE ===================== -->
+<footer>
+  <div class="wrap">
+    <h2 class="sec-title" style="font-size:1.3rem">BibTeX</h2>
+    <div class="cite-box" id="citeBox">@article{gao2026list3r,
+  title         = {LIST3R: Long-sequence Instance-aware 3D Reconstruction},
+  author        = {Gao, Jing and Wang, Wei and Wang, Feiran and Yan, Yan},
+  year          = {2026},
+  eprint        = {2607.00375},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  url           = {https://arxiv.org/abs/2607.00375}
+}<button id="copyCite">Copy</button></div>
+    <p style="margin-top:22px">© 2026 LIST3R. Project page for academic use. Reconstructions shown are on public benchmarks
+      (TUM, ETH3D, BONN, NRGBD, 7-Scenes).</p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox"><img src="" alt="zoom" /></div>
+
+<script src="app.js?v=12"></script>
+</body>
+</html>
