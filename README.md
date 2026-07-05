@@ -26,10 +26,13 @@ python serve.py          # serves at http://localhost:8731
 ## Citation
 
 ```bibtex
-@inproceedings{gao2026list3r,
-  title     = {LIST3R: Long-sequence Instance-aware 3D Reconstruction},
-  author    = {Gao, Jing and Wang, Wei and Wang, Feiran and Yan, Yan},
-  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
-  year      = {2026}
+@article{gao2026list3r,
+  title         = {LIST3R: Long-sequence Instance-aware 3D Reconstruction},
+  author        = {Gao, Jing and Wang, Wei and Wang, Feiran and Yan, Yan},
+  year          = {2026},
+  eprint        = {2607.00375},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  url           = {https://arxiv.org/abs/2607.00375}
 }
 ```
