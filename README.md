@@ -1,6 +1,13 @@
 # LIST3R: Long-sequence Instance-aware 3D Reconstruction
 
 <p align="center">
+  <a href="https://yixn965.github.io/">Jing Gao</a> &nbsp;·&nbsp;
+  <a href="https://weiwangtrento.github.io/">Wei Wang</a> &nbsp;·&nbsp;
+  <a href="https://brack-wang.github.io/">Feiran Wang</a> &nbsp;·&nbsp;
+  <a href="https://tomyan555.github.io/">Yan Yan</a>
+</p>
+
+<p align="center">
   <a href="https://arxiv.org/abs/2607.00375"><strong>arXiv</strong></a> |
   <a href="https://github.com/yixn965/LIST3R"><strong>Code</strong></a> |
   <a href="https://yixn965.github.io/LIST3R/"><strong>Project Page</strong></a>
