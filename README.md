@@ -1,4 +1,4 @@
-# LIST3R: Long-sequence Instance-aware 3D Reconstruction
+<h1 align="center">LIST3R: Long-sequence Instance-aware 3D Reconstruction</h1>
 
 <p align="center">
   <a href="https://yixn965.github.io/">Jing Gao</a> &nbsp;·&nbsp;
@@ -8,18 +8,26 @@
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2607.00375"><strong>arXiv</strong></a> |
-  <a href="https://github.com/yixn965/LIST3R"><strong>Code</strong></a> |
-  <a href="https://yixn965.github.io/LIST3R/"><strong>Project Page</strong></a>
+  <a href="https://arxiv.org/abs/2607.00375">
+    <img src="https://img.shields.io/badge/arXiv-2607.00375-b31b1b?style=flat&logo=arxiv&logoColor=white" alt="arXiv paper" height="20">
+  </a>
+  <a href="https://github.com/yixn965/LIST3R">
+    <img src="https://img.shields.io/badge/GitHub-Code-181717?style=flat&logo=github&logoColor=white" alt="GitHub code" height="20">
+  </a>
+  <a href="https://yixn965.github.io/LIST3R/">
+    <img src="https://img.shields.io/badge/Project-Page-2563eb?style=flat&logo=googlechrome&logoColor=white" alt="Project page" height="20">
+  </a>
 </p>
+
+## 🔍 Abstract
+
+We present **LIST3R**, an instance-aware framework for long-sequence 3D reconstruction inspired by the way humans organize spatial memory around stable and recognizable objects. LIST3R organizes long-sequence reconstruction around instance anchors, using them to reconnect fragmented subsequences and consolidate local observations into a coherent global 3D scene. Given a long video, our approach partitions it into overlapping subsequences and builds a structured local instance library for each partial reconstruction, maintaining persistent trackable anchors with semantic and geometric evidence. These anchors are matched across subsequences to recover revisited regions and provide object-aware constraints for fragment alignment, producing a consistent global reconstruction. During this process, the evolving geometric evidence updates the local instance libraries and progressively organizes them into a unified global 3D instance library. Experiments on long-sequence benchmarks show that our method produces more accurate trajectories and higher-quality 3D reconstructions, highlighting the effectiveness of persistent instance anchors for organizing long-horizon 3D reconstruction.
 
 <p align="center">
   <img src="docs/assets/figs/teaser.png" alt="LIST3R teaser" width="100%">
 </p>
 
-We present **LIST3R**, an instance-aware framework for long-sequence 3D reconstruction. LIST3R uses persistent object instances as anchors to reconnect fragmented subsequences, recover long-range revisits, and consolidate local observations into a coherent global 3D scene.
-
-## Method Overview
+## 🧩 Method Overview
 
 <p align="center">
   <img src="docs/assets/figs/method_pipeline.png" alt="LIST3R method overview" width="100%">
@@ -27,7 +35,7 @@ We present **LIST3R**, an instance-aware framework for long-sequence 3D reconstr
 
 LIST3R builds a local instance library for each subsequence, establishes cross-subsequence associations with instance-aware constraints, and consolidates local instance observations into a unified global 3D instance library.
 
-## Quantitative Analysis
+## 📊 Quantitative Analysis
 
 Camera pose estimation on long sequences. ATE / RTE are reported in meters, RRE in degrees. Lower is better.
 
@@ -59,7 +67,7 @@ Point cloud reconstruction quality. Chamfer / Acc / Comp are reported in centime
   <img src="docs/assets/figs/cloud_vis.png" alt="Qualitative long-sequence reconstruction" width="100%">
 </p>
 
-## Citation
+## 📝 Citation
 
 ```bibtex
 @article{gao2026list3r,
